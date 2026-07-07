@@ -1,0 +1,73 @@
+# LiveCurrency200converterBot
+
+A free Telegram bot that converts currencies using live exchange rates
+(via the [Frankfurter API](https://www.frankfurter.app) — free, no key required).
+
+## Features
+- `/convert 100 USD NGN` — instant conversion
+- Also works with plain text: just type `100 USD NGN` or `100 USD to NGN`
+- `/start` and `/help` commands
+
+---
+
+## 1. Get your bot token
+
+1. Open Telegram, search for **@BotFather**.
+2. Send `/newbot`.
+3. Choose a display name, then set the username to `LiveCurrency200converterBot`
+   (must end in "bot" and be unique — BotFather will tell you instantly if it's taken).
+4. BotFather will give you a **token** like `123456789:ABCdefGhIJKlmNoPQRstuVWxyz`.
+   Save this — you'll need it in step 3.
+
+---
+
+## 2. Push this project to GitHub
+
+From this folder:
+
+```bash
+git init
+git add .
+git commit -m "Initial commit: currency converter bot"
+git branch -M main
+git remote add origin https://github.com/<your-username>/<your-repo-name>.git
+git push -u origin main
+```
+
+(Create the empty repo on GitHub first at github.com/new — don't add a README there,
+since this folder already has one.)
+
+---
+
+## 3. Deploy on Railway
+
+1. Go to [railway.app](https://railway.app) and log in with GitHub.
+2. Click **New Project → Deploy from GitHub repo**.
+3. Select the repo you just pushed.
+4. Railway will detect the `Procfile` and `requirements.txt` automatically.
+5. Go to your service's **Variables** tab and add:
+   - `BOT_TOKEN` = the token BotFather gave you
+6. Railway will build and start the bot automatically. Check the **Deployments → Logs**
+   tab — you should see `Bot starting...` with no errors.
+7. Open Telegram and message your bot. It should respond immediately.
+
+---
+
+## 4. Local testing (optional, before deploying)
+
+```bash
+pip install -r requirements.txt
+export BOT_TOKEN=your_token_here   # on Windows (PowerShell): $env:BOT_TOKEN="your_token_here"
+python bot.py
+```
+
+---
+
+## Notes
+- Frankfurter's free API covers major fiat currencies (USD, EUR, GBP, NGN, JPY, etc.)
+  and does not require any sign-up or API key.
+- Rates update once per banking day — this is not a live tick-by-tick feed, so it's
+  best suited for everyday conversions rather than trading.
+- If you outgrow the free rate source, swap the `FRANKFURTER_URL` logic in `bot.py`
+  for a provider like exchangerate-api.com or Open Exchange Rates (both have free tiers
+  with an API key).
